@@ -13,6 +13,4 @@ public class WorkoutNotebookBotApplication {
     public static void main(String[] args) {
         SpringApplication.run(WorkoutNotebookBotApplication.class, args);
     }
-
-
 }

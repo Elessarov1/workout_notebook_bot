@@ -20,6 +20,7 @@ public class WorkoutBot extends TelegramLongPollingBot {
     private final BotProperties botProperties;
     private final CommandHandler commandHandler;
     private final CallbackHandler callbackHandler;
+
     @Override
     public String getBotUsername() {
         return botProperties.getName();
