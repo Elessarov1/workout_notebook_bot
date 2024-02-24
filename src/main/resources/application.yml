@@ -9,7 +9,7 @@ postgres:
 
 bot:
   name: Workout_notebook_bot
-  token: ${BOT_TOKEN:7179930312:AAEhs-vI87VRWX06-Y9emmN1peelLb7HMxc}
+  token: ${BOT_TOKEN:}
 
 spring:
   datasource:
