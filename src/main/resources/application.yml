@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+postgres:
+  host: localhost:5432
+  database: workout_bot_db
+  username: postgres
+  password: postgres
+
+bot:
+  name: Workout_notebook_bot
+  token: ${BOT_TOKEN:7179930312:AAEhs-vI87VRWX06-Y9emmN1peelLb7HMxc}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${postgres.host}/${postgres.database}
+    username: ${postgres.username}
+    password: ${postgres.password}
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+  liquibase:
+    enabled: true
