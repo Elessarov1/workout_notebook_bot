@@ -1,4 +1,4 @@
-package ru.elessarov.workout_notebook_bot;
+package ru.elessarov.workout_notebook_bot.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.elessarov.workout_notebook_bot.api.config.BotProperties;
-import ru.elessarov.workout_notebook_bot.service.MessageValidator;
+
 
 @Component
 @AllArgsConstructor
