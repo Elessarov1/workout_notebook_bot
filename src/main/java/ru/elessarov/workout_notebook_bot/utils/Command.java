@@ -1,27 +1,32 @@
 package ru.elessarov.workout_notebook_bot.utils;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.Arrays;
 
+@AllArgsConstructor
+@Getter
 public enum Command {
-     START("/start"),
-     HELP("/help"),
-     TRAININGS("/trainings"),
-     MY_TRAININGS("/my_trainings"),
-     SUBSCRIPTION("/subscription");
+     START("/start", "стартовое приветствие", true),
+     HELP("/help", "выводит весь список команд"),
+     TRAININGS("/trainings", "выбрать одну из стандартных тренировок"),
+     MY_TRAININGS("/my_trainings", "показать сохраненные тренировки"),
+     SUBSCRIPTION("/subscription", "показать информацию о подписке");
 
-     private final String text;
+     private final String name;
+     private final String description;
+     private final Boolean menuExcluded;
 
-    Command(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
-        return text;
+    Command(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.menuExcluded = false;
     }
 
     public static Command of(String text) {
         return Arrays.stream(Command.values())
-                .filter(command -> command.getText().equals(text))
+                .filter(command -> command.getName().equals(text))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No such command " + text));
     }

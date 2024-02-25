@@ -45,18 +45,23 @@ public class CommandHandler implements BasicActions {
     }
 
     private String getHelpText() {
-        return String.format("%s - выбрать одну из стандартных тренировок \n" +
-                "%s - показать сохраненные тренировки \n" +
-                "%s - показать информацию о подписке \n " +
-                "%s - выводит весь список команд",
-                        Command.TRAININGS.getText(),
-                        Command.MY_TRAININGS.getText(),
-                        Command.SUBSCRIPTION.getText(),
-                        Command.HELP.getText());
+        return String.format("""
+                        %s - %s\s
+                        %s - %s\s
+                        %s - %s\s
+                         %s - %s""",
+                Command.TRAININGS.getName(),
+                Command.TRAININGS.getDescription(),
+                Command.MY_TRAININGS.getName(),
+                Command.MY_TRAININGS.getDescription(),
+                Command.SUBSCRIPTION.getName(),
+                Command.SUBSCRIPTION.getDescription(),
+                Command.HELP.getName(),
+                Command.HELP.getDescription());
     }
     private String getGreetingText(String username) {
         return ("Привет %s,\n" +
-                "если нужна помощь с командами воспользуйся командой - %s").formatted(username, Command.HELP.getText());
+                "если нужна помощь с командами воспользуйся командой - %s").formatted(username, Command.HELP.getName());
     }
 
     public SendMessage sendUnknownMessage(Update update) {
@@ -65,7 +70,6 @@ public class CommandHandler implements BasicActions {
 
     private SendMessage sendTrainingMessage(Update update) {
         String chatId = getChatId(update);
-        String username = update.getMessage().getFrom().getUserName();
         SendMessage sendMessage = new SendMessage(chatId, "Выбери вид тренировки");
         List<String> keyboardList = Arrays.stream(TrainingType.values())
                 .map(TrainingType::getDescription)
