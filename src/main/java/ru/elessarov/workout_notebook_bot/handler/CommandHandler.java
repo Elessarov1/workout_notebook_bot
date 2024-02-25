@@ -19,18 +19,14 @@ public class CommandHandler implements BasicActions {
 
     public SendMessage handleCommands(Update update) {
         Command command = Command.of(update.getMessage().getText());
+        SendMessage message = null;
        switch (command) {
-           case START -> {
-               return sendGreetingMessage(update);
-           }
-           case HELP -> {
-               return  sendHelpMessage(update);
-           }
-           case TRAININGS ->  {
-               return sendTrainingMessage(update);
-           }
+           case START -> message = sendGreetingMessage(update);
+           case HELP -> message = sendHelpMessage(update);
+           case TRAININGS ->  message = sendTrainingMessage(update);
+           case UNKNOWN -> message = sendUnknownMessage(update);
        }
-       return sendUnknownMessage(update);
+       return message;
     }
 
     private SendMessage sendHelpMessage(Update update) {
@@ -45,11 +41,8 @@ public class CommandHandler implements BasicActions {
     }
 
     private String getHelpText() {
-        return String.format("""
-                        %s - %s\s
-                        %s - %s\s
-                        %s - %s\s
-                         %s - %s""",
+        return String.format(
+                Constants.HELP_BLOCK,
                 Command.TRAININGS.getName(),
                 Command.TRAININGS.getDescription(),
                 Command.MY_TRAININGS.getName(),
@@ -60,8 +53,7 @@ public class CommandHandler implements BasicActions {
                 Command.HELP.getDescription());
     }
     private String getGreetingText(String username) {
-        return ("Привет %s,\n" +
-                "если нужна помощь с командами воспользуйся командой - %s").formatted(username, Command.HELP.getName());
+        return (Constants.GREETING_TEXT).formatted(username, Command.HELP.getName());
     }
 
     public SendMessage sendUnknownMessage(Update update) {
@@ -70,7 +62,7 @@ public class CommandHandler implements BasicActions {
 
     private SendMessage sendTrainingMessage(Update update) {
         String chatId = getChatId(update);
-        SendMessage sendMessage = new SendMessage(chatId, "Выбери вид тренировки");
+        SendMessage sendMessage = new SendMessage(chatId, Constants.CHOOSE_TRAINING_TYPE);
         List<String> keyboardList = Arrays.stream(TrainingType.values())
                 .map(TrainingType::getDescription)
                 .toList();
