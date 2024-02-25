@@ -1,4 +1,4 @@
-package ru.elessarov.workout_notebook_bot.config;
+package ru.elessarov.workout_notebook_bot.api.config;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.ApplicationContext;

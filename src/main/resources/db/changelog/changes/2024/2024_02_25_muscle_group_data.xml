@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20240225-01" author="admin">
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="1"/>
+            <column name="group_name" value="Все тело"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="2"/>
+            <column name="group_name" value="Верх тела"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="3"/>
+            <column name="group_name" value="Низ тела"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="4"/>
+            <column name="group_name" value="Спина"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="5"/>
+            <column name="group_name" value="Спина/трицепс"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="6"/>
+            <column name="group_name" value="Грудь"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="7"/>
+            <column name="group_name" value="Грудь/бицепс"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="8"/>
+            <column name="group_name" value="Ноги"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="9"/>
+            <column name="group_name" value="Ноги/плечи"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="10"/>
+            <column name="group_name" value="Плечи"/>
+        </insert>
+
+        <insert tableName="muscle_group">
+            <column name="group_id" value="11"/>
+            <column name="group_name" value="Руки"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

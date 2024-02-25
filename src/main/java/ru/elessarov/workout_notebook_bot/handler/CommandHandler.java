@@ -13,6 +13,8 @@ public class CommandHandler {
 
     public SendMessage handleCommands(Update update) {
         long id = update.getMessage().getChatId();
-        return new SendMessage(String.valueOf(id), "command message");
+        String username = update.getMessage().getFrom().getUserName();
+        return new SendMessage(String.valueOf(id), "Привет %s".formatted(username));
+
     }
 }

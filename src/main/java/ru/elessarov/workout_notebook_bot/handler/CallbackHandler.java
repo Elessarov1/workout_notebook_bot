@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Slf4j
 public class CallbackHandler {
     public SendMessage handleCallbacks(Update update) {
-        long id = update.getMessage().getChatId();
+        long id = update.getCallbackQuery().getMessage().getChatId();
         return new SendMessage(String.valueOf(id), "callback message");
     }
 }
