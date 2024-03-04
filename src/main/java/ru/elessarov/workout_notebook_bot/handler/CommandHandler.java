@@ -24,6 +24,8 @@ public class CommandHandler implements BasicActions {
            case START -> message = sendGreetingMessage(update);
            case HELP -> message = sendHelpMessage(update);
            case TRAININGS ->  message = sendTrainingMessage(update);
+           case MY_TRAININGS -> message = sendMyTrainingMessage(update);
+           case SUBSCRIPTION -> message = sendSubscriptionMessage(update);
            case UNKNOWN -> message = sendUnknownMessage(update);
        }
        return message;
@@ -68,5 +70,13 @@ public class CommandHandler implements BasicActions {
                 .toList();
         addKeyboard(sendMessage, keyboardList);
         return sendMessage;
+    }
+
+    private SendMessage sendMyTrainingMessage(Update update) {
+        return new SendMessage(getChatId(update), "Здесь будет информация о твоих сохраненных тренировках");
+    }
+
+    private SendMessage sendSubscriptionMessage(Update update) {
+        return new SendMessage(getChatId(update), "Здесь будет информация о подписке на бота");
     }
 }
