@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/changes/2024/2024_02_25_muscle_group_data.xml
   - include:
       file: db/changelog/changes/2024/2024_02_25_users_users_exercises.xml
+  - include:
+      file: db/changelog/changes/2024/2024_03_07_trainings_trainings_exercises.xml

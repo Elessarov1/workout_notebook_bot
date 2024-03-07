@@ -20,15 +20,15 @@ public class CommandHandler implements BasicActions {
     public SendMessage handleCommands(Update update) {
         Command command = Command.of(update.getMessage().getText());
         SendMessage message = null;
-       switch (command) {
-           case START -> message = sendGreetingMessage(update);
-           case HELP -> message = sendHelpMessage(update);
-           case TRAININGS ->  message = sendTrainingMessage(update);
-           case MY_TRAININGS -> message = sendMyTrainingMessage(update);
-           case SUBSCRIPTION -> message = sendSubscriptionMessage(update);
-           case UNKNOWN -> message = sendUnknownMessage(update);
-       }
-       return message;
+        switch (command) {
+            case START -> message = sendGreetingMessage(update);
+            case HELP -> message = sendHelpMessage(update);
+            case TRAININGS -> message = sendTrainingMessage(update);
+            case MY_TRAININGS -> message = sendMyTrainingMessage(update);
+            case SUBSCRIPTION -> message = sendSubscriptionMessage(update);
+            case UNKNOWN -> message = sendUnknownMessage(update);
+        }
+        return message;
     }
 
     private SendMessage sendHelpMessage(Update update) {
@@ -54,6 +54,7 @@ public class CommandHandler implements BasicActions {
                 Command.HELP.getName(),
                 Command.HELP.getDescription());
     }
+
     private String getGreetingText(String username) {
         return (Constants.GREETING_TEXT).formatted(username, Command.HELP.getName());
     }

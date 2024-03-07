@@ -1,7 +1,19 @@
 package ru.elessarov.workout_notebook_bot.api.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,4 +32,7 @@ public class MuscleGroupEntity {
     private Integer groupId;
     @Column(name = GROUP_NAME, unique = true)
     private String groupName;
+
+    @ManyToMany(mappedBy = "muscleGroups")
+    private List<ExerciseEntity> exercises;
 }

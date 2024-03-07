@@ -17,7 +17,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
 import ru.elessarov.workout_notebook_bot.api.model.TrainingType;
 
 import java.util.List;
@@ -28,28 +27,29 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-@Table(name = "exercise")
-public class ExerciseEntity {
-    public static final String EXERCISE_ID = "exercise_id";
-    private static final String EXERCISE_NAME = "exercise_name";
+@Table(name = "trainings")
+public class TrainingEntity {
+
+    public static final String TRAINING_ID = "training_id";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "exercise_id")
-    private Integer exerciseId;
-    @Column(name = EXERCISE_NAME, unique = true)
-    private String exerciseName;
-    @Enumerated(EnumType.STRING)
+    @Column(name = TRAINING_ID)
+    private Integer trainingId;
+
+    @Column(name = "training_name", unique = true)
+    private String trainingName;
+
     @Column(name = "training_type")
+    @Enumerated(EnumType.STRING)
     private TrainingType trainingType;
 
-    @BatchSize(size = 50)
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "exercise_muscle_groups",
-            joinColumns = @JoinColumn(name = EXERCISE_ID),
-            inverseJoinColumns = @JoinColumn(name = MuscleGroupEntity.GROUP_ID))
-    private List<MuscleGroupEntity> muscleGroups;
+    @JoinTable(name = "trainings_exercise",
+            joinColumns = @JoinColumn(name = ExerciseEntity.EXERCISE_ID),
+            inverseJoinColumns = @JoinColumn(name = TRAINING_ID))
+    private List<ExerciseEntity> exercises;
 
-    @ManyToMany(mappedBy = "exercises")
-    private List<TrainingEntity> trainings;
+    @ManyToMany(mappedBy = "trainings")
+    private List<UserEntity> users;
 }
