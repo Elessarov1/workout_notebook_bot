@@ -1,4 +1,4 @@
-package ru.elessarov.workout_notebook_bot.utils;
+package ru.elessarov.workout_notebook_bot.api.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

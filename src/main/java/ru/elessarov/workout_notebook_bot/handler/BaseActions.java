@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-public interface BasicActions {
+public interface BaseActions {
     default String getChatId(Update update) {
         return update.getMessage().getChatId().toString();
     }

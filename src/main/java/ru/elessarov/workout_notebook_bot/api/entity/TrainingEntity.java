@@ -17,7 +17,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.elessarov.workout_notebook_bot.api.model.TrainingType;
+import ru.elessarov.workout_notebook_bot.api.enums.TrainingType;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class TrainingEntity {
     private TrainingType trainingType;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "trainings_exercise",
+    @JoinTable(name = "trainings_exercises",
             joinColumns = @JoinColumn(name = ExerciseEntity.EXERCISE_ID),
             inverseJoinColumns = @JoinColumn(name = TRAINING_ID))
     private List<ExerciseEntity> exercises;

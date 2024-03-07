@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.elessarov.workout_notebook_bot.api.model.TrainingType;
-import ru.elessarov.workout_notebook_bot.utils.Command;
+import ru.elessarov.workout_notebook_bot.api.enums.TrainingType;
+import ru.elessarov.workout_notebook_bot.api.enums.Command;
 import ru.elessarov.workout_notebook_bot.utils.Constants;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class CommandHandler implements BasicActions {
+public class CommandHandler implements BaseActions {
 
     public SendMessage handleCommands(Update update) {
         Command command = Command.of(update.getMessage().getText());

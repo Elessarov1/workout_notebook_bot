@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20240307-01" author="AAfanasev">
+        <createTable tableName="users">
+            <column name="user_id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="trainings">
+            <column name="training_id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="training_name" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="training_type" type="varchar(255)"/>
+        </createTable>
+
+        <createSequence
+                sequenceName="trainings_seq"
+                startValue="1"
+                incrementBy="50"
+        />
+
+        <createTable tableName="users_trainings">
+            <column name="user_id" type="integer"/>
+            <column name="training_id" type="integer"/>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_users_trainings_user_id_users_user_id"
+                                 baseTableName="users_trainings"
+                                 baseColumnNames="user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="user_id"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_users_trainings_training_id_exercise_exercise_id"
+                                 baseTableName="users_trainings"
+                                 baseColumnNames="training_id"
+                                 referencedTableName="trainings"
+                                 referencedColumnNames="training_id"
+        />
+
+        <createIndex tableName="users_trainings" indexName="users_trainings_user_id_ix">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex tableName="users_trainings" indexName="users_trainings_training_id_ix">
+            <column name="training_id"/>
+        </createIndex>
+    </changeSet>
+
+
+
+    <changeSet id="20240307-02" author="AAfanasev">
+
+        <createTable tableName="exercises">
+            <column name="exercise_id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="exercise_name" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="muscle_groups" type="varchar(512)"/>
+        </createTable>
+
+        <createSequence
+                sequenceName="exercises_seq"
+                startValue="1"
+                incrementBy="50"
+        />
+
+        <createTable tableName="trainings_exercises">
+            <column name="training_id" type="integer"/>
+            <column name="exercise_id" type="integer"/>
+        </createTable>
+
+
+        <addForeignKeyConstraint constraintName="fk_trainings_exercise_training_id_trainings_training_id"
+                                 baseTableName="trainings_exercises"
+                                 baseColumnNames="training_id"
+                                 referencedTableName="trainings"
+                                 referencedColumnNames="training_id"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_trainings_exercise_exercise_id_exercise_exercise_id"
+                                 baseTableName="trainings_exercises"
+                                 baseColumnNames="exercise_id"
+                                 referencedTableName="exercises"
+                                 referencedColumnNames="exercise_id"
+        />
+
+        <createIndex tableName="trainings_exercises" indexName="trainings_exercise_training_id_ix">
+            <column name="training_id"/>
+        </createIndex>
+
+        <createIndex tableName="trainings_exercises" indexName="trainings_exercise_exercise_id_ix">
+            <column name="exercise_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
