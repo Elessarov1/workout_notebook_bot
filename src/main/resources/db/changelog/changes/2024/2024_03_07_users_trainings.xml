@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20240307-02" author="admin">
+
+        <createTable tableName="users_trainings">
+            <column name="user_id" type="integer"/>
+            <column name="training_id" type="integer"/>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_users_trainings_user_id_users_user_id"
+                                 baseTableName="users_trainings"
+                                 baseColumnNames="user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="user_id"
+        />
+
+        <addForeignKeyConstraint constraintName="fk_users_trainings_training_id_trainings_training_id"
+                                 baseTableName="users_trainings"
+                                 baseColumnNames="training_id"
+                                 referencedTableName="trainings"
+                                 referencedColumnNames="training_id"
+        />
+
+        <createIndex tableName="users_trainings" indexName="users_trainings_user_id_ix">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex tableName="users_trainings" indexName="users_trainings_training_id_ix">
+            <column name="training_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

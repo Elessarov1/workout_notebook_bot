@@ -16,6 +16,12 @@
             <column name="training_type" type="varchar(255)"/>
         </createTable>
 
+        <createSequence
+                sequenceName="trainings_seq"
+                startValue="1"
+                incrementBy="50"
+        />
+
         <createTable tableName="trainings_exercise">
             <column name="training_id" type="integer"/>
             <column name="exercise_id" type="integer"/>
