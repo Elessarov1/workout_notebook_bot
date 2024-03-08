@@ -1,13 +1,6 @@
 package ru.elessarov.workout_notebook_bot.api.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,11 +18,12 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity {
     private static final String USER_ID = "user_id";
+    public static final String USERNAME = "username";
 
     @Id
     @Column(name = USER_ID)
-    private Integer userId;
-    @Column
+    private Long userId;
+    @Column(name = USERNAME)
     private String username;
     @Column(name = "first_name")
     private String firstName;
@@ -39,4 +33,9 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = USER_ID),
             inverseJoinColumns = @JoinColumn(name = TrainingEntity.TRAINING_ID))
     private List<TrainingEntity> trainings;
+
+    @OneToOne
+    @JoinColumn(name = "subscribe_expire_after", referencedColumnName = SubscribeEntity.EXPIRE_AFTER)
+    private SubscribeEntity subscribe;
+
 }
