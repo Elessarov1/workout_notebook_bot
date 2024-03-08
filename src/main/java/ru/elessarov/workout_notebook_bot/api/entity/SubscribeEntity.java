@@ -14,7 +14,9 @@ public class SubscribeEntity {
     public static final String SUBSCRIBE = "subscribe";
 
     @Id
-    private String secret;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "sub_id")
+    private Integer id;
     @Column(name = EXPIRE_AFTER)
     private Long expireAfter;
     @Column
