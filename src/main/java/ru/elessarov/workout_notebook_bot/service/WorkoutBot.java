@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.elessarov.workout_notebook_bot.api.config.BotProperties;
-import ru.elessarov.workout_notebook_bot.utils.Command;
+import ru.elessarov.workout_notebook_bot.api.enums.Command;
 
 import java.util.ArrayList;
 import java.util.Arrays;

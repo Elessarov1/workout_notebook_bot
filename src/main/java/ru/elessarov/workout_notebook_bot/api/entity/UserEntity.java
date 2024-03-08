@@ -1,11 +1,20 @@
 package ru.elessarov.workout_notebook_bot.api.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.Map;
-
-import static ru.elessarov.workout_notebook_bot.api.entity.ExerciseEntity.EXERCISE_ID;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,10 +33,10 @@ public class UserEntity {
     private String username;
     @Column(name = "first_name")
     private String firstName;
-    @ManyToMany
-    @JoinTable(name = "user_exercises",
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_trainings",
             joinColumns = @JoinColumn(name = USER_ID),
-            inverseJoinColumns = @JoinColumn(name = EXERCISE_ID))
-    @MapKey(name = "exerciseName")
-    private Map<String, ExerciseEntity> exercises;
+            inverseJoinColumns = @JoinColumn(name = TrainingEntity.TRAINING_ID))
+    private List<TrainingEntity> trainings;
 }

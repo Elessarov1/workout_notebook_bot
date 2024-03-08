@@ -1,4 +1,4 @@
-package ru.elessarov.workout_notebook_bot.api.model;
+package ru.elessarov.workout_notebook_bot.api.enums;
 
 import java.util.Arrays;
 

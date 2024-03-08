@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class CallbackHandler implements BasicActions {
+public class CallbackHandler implements BaseActions {
     public SendMessage handleCallbacks(Update update) {
         long id = update.getCallbackQuery().getMessage().getChatId();
         return new SendMessage(String.valueOf(id), "callback message");

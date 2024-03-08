@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.elessarov.workout_notebook_bot.api.model.TrainingType;
-import ru.elessarov.workout_notebook_bot.utils.Command;
+import ru.elessarov.workout_notebook_bot.api.enums.TrainingType;
+import ru.elessarov.workout_notebook_bot.api.enums.Command;
 import ru.elessarov.workout_notebook_bot.utils.Constants;
 
 import java.util.Arrays;
@@ -15,20 +15,20 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class CommandHandler implements BasicActions {
+public class CommandHandler implements BaseActions {
 
     public SendMessage handleCommands(Update update) {
         Command command = Command.of(update.getMessage().getText());
         SendMessage message = null;
-       switch (command) {
-           case START -> message = sendGreetingMessage(update);
-           case HELP -> message = sendHelpMessage(update);
-           case TRAININGS ->  message = sendTrainingMessage(update);
-           case MY_TRAININGS -> message = sendMyTrainingMessage(update);
-           case SUBSCRIPTION -> message = sendSubscriptionMessage(update);
-           case UNKNOWN -> message = sendUnknownMessage(update);
-       }
-       return message;
+        switch (command) {
+            case START -> message = sendGreetingMessage(update);
+            case HELP -> message = sendHelpMessage(update);
+            case TRAININGS -> message = sendTrainingMessage(update);
+            case MY_TRAININGS -> message = sendMyTrainingMessage(update);
+            case SUBSCRIPTION -> message = sendSubscriptionMessage(update);
+            case UNKNOWN -> message = sendUnknownMessage(update);
+        }
+        return message;
     }
 
     private SendMessage sendHelpMessage(Update update) {
@@ -54,6 +54,7 @@ public class CommandHandler implements BasicActions {
                 Command.HELP.getName(),
                 Command.HELP.getDescription());
     }
+
     private String getGreetingText(String username) {
         return (Constants.GREETING_TEXT).formatted(username, Command.HELP.getName());
     }

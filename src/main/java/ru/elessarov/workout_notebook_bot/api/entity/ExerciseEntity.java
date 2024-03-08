@@ -1,9 +1,12 @@
 package ru.elessarov.workout_notebook_bot.api.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.BatchSize;
-import ru.elessarov.workout_notebook_bot.api.model.TrainingType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import ru.elessarov.workout_notebook_bot.converter.MuscleGroupConverter;
 
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-@Table(name = "exercise")
+@Table(name = "exercises")
 public class ExerciseEntity {
     public static final String EXERCISE_ID = "exercise_id";
     private static final String EXERCISE_NAME = "exercise_name";
@@ -22,15 +25,17 @@ public class ExerciseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "exercise_id")
     private Integer exerciseId;
+
     @Column(name = EXERCISE_NAME, unique = true)
     private String exerciseName;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "training_type")
-    private TrainingType trainingType;
-    @BatchSize(size = 50)
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "exercise_muscle_groups",
-            joinColumns = @JoinColumn(name = MuscleGroupEntity.GROUP_ID),
-            inverseJoinColumns = @JoinColumn(name = EXERCISE_ID))
-    private List<MuscleGroupEntity> muscleGroups;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "muscle_groups")
+    @Convert(converter = MuscleGroupConverter.class)
+    private List<MuscleGroup> muscleGroups;
+
+    @ManyToMany(mappedBy = "exercises")
+    private List<TrainingEntity> trainings;
+
+    //TODO добавить поле детальной картинки упражнения, описание или рекомендации к выполнению
 }
