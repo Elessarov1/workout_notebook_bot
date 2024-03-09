@@ -7,15 +7,17 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
-@Table(name = SubscribeEntity.SUBSCRIBE)
-public class SubscribeEntity {
+@Table(name = Subscription.SUBSCRIPTION)
+public class Subscription {
     public static final String EXPIRE_AFTER = "expire_after";
-    public static final String SUBSCRIBE = "subscribe";
+    public static final String SUBSCRIPTION = "subscription";
+    public static final String SUB_ID = "sub_id";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "sub_id")
+    @Column(name = SUB_ID)
     private Integer id;
     @Column(name = EXPIRE_AFTER)
     private Long expireAfter;
@@ -30,7 +32,8 @@ public class SubscribeEntity {
         return payed;
     }
 
-    public boolean confirmPay() {
-        return this.payed = true;
+    public Subscription confirmPay() {
+        this.payed = true;
+        return this;
     }
 }
