@@ -6,13 +6,16 @@
 
     <changeSet id="20240307-01" author="AAfanasev">
         <createTable tableName="users">
-            <column name="user_id" type="integer">
+            <column name="user_id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="username" type="varchar(255)">
                 <constraints unique="true"/>
             </column>
             <column name="first_name" type="varchar(255)"/>
+            <column name="chat_id" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
         </createTable>
 
         <createTable tableName="trainings">
@@ -32,7 +35,7 @@
         />
 
         <createTable tableName="users_trainings">
-            <column name="user_id" type="integer"/>
+            <column name="user_id" type="bigint"/>
             <column name="training_id" type="integer"/>
         </createTable>
 

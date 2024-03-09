@@ -2,20 +2,25 @@ package ru.elessarov.workout_notebook_bot.handler;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.elessarov.workout_notebook_bot.api.enums.TrainingType;
 import ru.elessarov.workout_notebook_bot.api.enums.Command;
+import ru.elessarov.workout_notebook_bot.service.SubscribeService;
+import ru.elessarov.workout_notebook_bot.utils.BotUtils;
 import ru.elessarov.workout_notebook_bot.utils.Constants;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+import static ru.elessarov.workout_notebook_bot.utils.BotUtils.*;
+
+@Service
 @AllArgsConstructor
 @Slf4j
-public class CommandHandler implements BaseActions {
+public class CommandHandler {
+    private final SubscribeService subscribeService;
 
     public SendMessage handleCommands(Update update) {
         Command command = Command.of(update.getMessage().getText());
@@ -69,7 +74,7 @@ public class CommandHandler implements BaseActions {
         List<String> keyboardList = Arrays.stream(TrainingType.values())
                 .map(TrainingType::getDescription)
                 .toList();
-        addKeyboard(sendMessage, keyboardList);
+        BotUtils.addKeyboard(sendMessage, keyboardList);
         return sendMessage;
     }
 
@@ -78,6 +83,6 @@ public class CommandHandler implements BaseActions {
     }
 
     private SendMessage sendSubscriptionMessage(Update update) {
-        return new SendMessage(getChatId(update), "Здесь будет информация о подписке на бота");
+        return subscribeService.checkUserSubscribe(update);
     }
 }
