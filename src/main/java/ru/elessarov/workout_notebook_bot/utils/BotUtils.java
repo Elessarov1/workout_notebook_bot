@@ -1,5 +1,6 @@
-package ru.elessarov.workout_notebook_bot.handler;
+package ru.elessarov.workout_notebook_bot.utils;
 
+import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -8,12 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-public interface BaseActions {
-    default String getChatId(Update update) {
+@UtilityClass
+public class BotUtils {
+    public String getChatId(Update update) {
         return update.getMessage().getChatId().toString();
     }
 
-    default void addKeyboard(SendMessage sendMessage, List<String> collection) {
+    public void addKeyboard(SendMessage sendMessage, List<String> collection) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 
