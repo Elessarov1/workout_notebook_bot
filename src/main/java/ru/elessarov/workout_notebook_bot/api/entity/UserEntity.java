@@ -27,6 +27,8 @@ public class UserEntity {
     private String username;
     @Column(name = "first_name")
     private String firstName;
+    @Column(name = "chat_id")
+    private String chatId;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_trainings",
@@ -35,7 +37,7 @@ public class UserEntity {
     private List<TrainingEntity> trainings;
 
     @OneToOne
-    @JoinColumn(name = "subscribe_expire_after", referencedColumnName = SubscribeEntity.EXPIRE_AFTER)
-    private SubscribeEntity subscribe;
+    @JoinColumn(name = Subscription.SUB_ID, referencedColumnName = Subscription.SUB_ID)
+    private Subscription subscribe;
 
 }
