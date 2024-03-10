@@ -29,7 +29,6 @@ public class ExerciseEntity {
     @Column(name = EXERCISE_NAME, unique = true)
     private String exerciseName;
 
-    @Enumerated(value = EnumType.STRING)
     @Column(name = "muscle_groups")
     @Convert(converter = MuscleGroupConverter.class)
     private List<MuscleGroup> muscleGroups;

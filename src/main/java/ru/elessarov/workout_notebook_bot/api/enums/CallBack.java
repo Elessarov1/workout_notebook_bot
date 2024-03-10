@@ -12,7 +12,10 @@ public enum CallBack {
     SUBSCRIBE_THREE_MONTH("3 месяца - 1200р"),
     SUBSCRIBE_ONE_YEAR("1 год - 3000р"),
     CONFIRM_PAY("Подтвердить оплату"),
-    UNKNOWN("Unknown");
+    UNKNOWN("Unknown"),
+    CARDIO("Кардио"),
+    STRENGTH("Силовая"),
+    CROSSFIT("Кроссфит");
 
     private final String name;
 

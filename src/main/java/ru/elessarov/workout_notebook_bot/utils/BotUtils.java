@@ -20,15 +20,15 @@ public class BotUtils {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public String getChatId(Update update) {
+    public static String getChatId(Update update) {
         return update.getMessage().getChatId().toString();
     }
 
-    public String getCallbackChatId(Update update) {
+    public static String getCallbackChatId(Update update) {
         return update.getCallbackQuery().getMessage().getChatId().toString();
     }
 
-    public void addKeyboard(SendMessage sendMessage, List<String> collection) {
+    public static void addKeyboard(SendMessage sendMessage, List<String> collection) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 
@@ -44,17 +44,17 @@ public class BotUtils {
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
     }
 
-    public SendMessage notifyAdmin(final UserEntity user, final int months) {
+    public static SendMessage notifyAdmin(final UserEntity user, final int months) {
         var message =  new SendMessage(ADMIN_ID, "@%s want to sub for %d months".formatted(user.getUsername(), months));
         addKeyboard(message, List.of("Подтвердить оплату, %d".formatted(user.getSubscribe().getId())));
         return message;
     }
 
-    public boolean isUserAdmin(final User user) {
+    public static boolean isUserAdmin(final User user) {
         return String.valueOf(user.getId()).equals(ADMIN_ID);
     }
 
-    public int extractSubId(final String value) {
+    public static int extractSubId(final String value) {
         String[] parts = value.split(",");
         if (parts.length > 0) {
            return Integer.parseInt(parts[1].trim());

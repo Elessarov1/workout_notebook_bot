@@ -13,6 +13,7 @@ public enum Command {
     TRAININGS("/trainings", "выбрать одну из стандартных тренировок"),
     MY_TRAININGS("/my_trainings", "показать сохраненные тренировки"),
     SUBSCRIPTION("/subscription", "показать информацию о подписке"),
+    EXERCISES("/exercises", "показать список тренировок"),
     UNKNOWN("/unknown", "неизвестное сообщение", true);
 
      private final String name;
