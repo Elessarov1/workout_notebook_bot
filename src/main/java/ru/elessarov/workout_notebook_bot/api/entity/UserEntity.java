@@ -29,6 +29,9 @@ public class UserEntity {
     private String firstName;
     @Column(name = "chat_id")
     private String chatId;
+    @Column(name = "admin")
+    @Builder.Default
+    private boolean admin = false;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_trainings",

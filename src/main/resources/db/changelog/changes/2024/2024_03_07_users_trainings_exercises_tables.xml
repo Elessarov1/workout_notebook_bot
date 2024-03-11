@@ -16,6 +16,7 @@
             <column name="chat_id" type="varchar(255)">
                 <constraints unique="true"/>
             </column>
+            <column name="admin" type="boolean"/>
         </createTable>
 
         <createTable tableName="trainings">
@@ -74,6 +75,12 @@
                 <constraints unique="true"/>
             </column>
             <column name="muscle_groups" type="varchar(512)"/>
+            <column name="description" type="varchar(2000)">
+                <constraints unique="true"/>
+            </column>
+            <column name="image_path" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
         </createTable>
 
         <createSequence

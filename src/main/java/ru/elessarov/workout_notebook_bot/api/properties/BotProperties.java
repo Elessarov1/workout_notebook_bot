@@ -1,4 +1,4 @@
-package ru.elessarov.workout_notebook_bot.api.config;
+package ru.elessarov.workout_notebook_bot.api.properties;
 
 import lombok.Getter;
 import lombok.Setter;

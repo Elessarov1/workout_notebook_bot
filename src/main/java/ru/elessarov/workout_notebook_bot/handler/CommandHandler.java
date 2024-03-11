@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.elessarov.workout_notebook_bot.api.enums.TrainingType;
 import ru.elessarov.workout_notebook_bot.api.enums.Command;
+import ru.elessarov.workout_notebook_bot.service.ExerciseService;
 import ru.elessarov.workout_notebook_bot.service.SubscribeService;
 import ru.elessarov.workout_notebook_bot.utils.BotUtils;
 import ru.elessarov.workout_notebook_bot.utils.Constants;
@@ -21,6 +22,7 @@ import static ru.elessarov.workout_notebook_bot.utils.BotUtils.*;
 @Slf4j
 public class CommandHandler {
     private final SubscribeService subscribeService;
+    private final ExerciseService exerciseService;
 
     public SendMessage handleCommands(Update update) {
         Command command = Command.of(update.getMessage().getText());
@@ -31,9 +33,17 @@ public class CommandHandler {
             case TRAININGS -> message = sendTrainingMessage(update);
             case MY_TRAININGS -> message = sendMyTrainingMessage(update);
             case SUBSCRIPTION -> message = sendSubscriptionMessage(update);
+            case EXERCISES -> message = sendExercises(update);
             case UNKNOWN -> message = sendUnknownMessage(update);
         }
         return message;
+    }
+
+    //TODO метод нужно доработать, пока что он выдает все сплошным текстом,
+    // при этом команда ничего не вернет если сущностей будет слишком много, нужно как то разделить
+    private SendMessage sendExercises(final Update update) {
+        var exercises = exerciseService.getAllExercises().toString();
+        return new SendMessage(getChatId(update), exercises);
     }
 
     private SendMessage sendHelpMessage(Update update) {

@@ -11,6 +11,9 @@ bot:
   name: Workout_notebook_bot
   token: ${BOT_TOKEN:}
 
+admin:
+  admin_id: ${TELEGRAM_ID:462874696}
+
 spring:
   datasource:
     url: jdbc:postgresql://${postgres.host}/${postgres.database}
