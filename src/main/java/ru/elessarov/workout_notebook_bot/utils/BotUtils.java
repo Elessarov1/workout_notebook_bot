@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.elessarov.workout_notebook_bot.utils.Constants.ADMIN_ID;
-
 @UtilityClass
 public class BotUtils {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
@@ -32,7 +30,7 @@ public class BotUtils {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 
-        for (String item: collection) {
+        for (String item : collection) {
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
             inlineKeyboardButton.setText(item);
             inlineKeyboardButton.setCallbackData(item);
@@ -45,19 +43,19 @@ public class BotUtils {
     }
 
     public static SendMessage notifyAdmin(final UserEntity user, final int months) {
-        var message =  new SendMessage(ADMIN_ID, "@%s want to sub for %d months".formatted(user.getUsername(), months));
+        var message = new SendMessage("${admin_id}", "@%s want to sub for %d months".formatted(user.getUsername(), months));
         addKeyboard(message, List.of("Подтвердить оплату, %d".formatted(user.getSubscribe().getId())));
         return message;
     }
 
     public static boolean isUserAdmin(final User user) {
-        return String.valueOf(user.getId()).equals(ADMIN_ID);
+        return String.valueOf(user.getId()).equals("${admin_id}");
     }
 
     public static int extractSubId(final String value) {
         String[] parts = value.split(",");
         if (parts.length > 0) {
-           return Integer.parseInt(parts[1].trim());
+            return Integer.parseInt(parts[1].trim());
         }
         return -1;
     }

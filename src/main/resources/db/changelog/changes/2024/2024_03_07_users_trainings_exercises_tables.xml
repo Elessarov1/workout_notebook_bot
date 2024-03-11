@@ -16,6 +16,7 @@
             <column name="chat_id" type="varchar(255)">
                 <constraints unique="true"/>
             </column>
+            <column name="admin" type="boolean"/>
         </createTable>
 
         <createTable tableName="trainings">

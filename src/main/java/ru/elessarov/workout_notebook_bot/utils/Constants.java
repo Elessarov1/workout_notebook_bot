@@ -15,14 +15,13 @@ public class Constants {
     public static final String CHOOSE_TRAINING_TYPE = "Выбери вид тренировки";
     public static final String YOUR_REQUEST_WAS_SEND = "Ваша заявка принята, администратор свяжется с вами в ближайшее время";
     public static final String CHOOSE_ONE_OF_SUBSCRIPTION = "Выберите один из вариантов подписки";
-    public static final String ADMIN_ID = "462874696";
     public static final String THIS_MESSAGE_ONLY_FOR_ADMIN = "Это сообщение доступно только админу";
     public static final String SUB_CONFIRM = "Подписка подтверждена";
     public static final String UNKNOWN_MESSAGE = "Unknown message";
 
     public static final String HELP_BLOCK = """
-                        %s - %s\s
-                        %s - %s\s
-                        %s - %s\s
-                         %s - %s""";
+            %s - %s\s
+            %s - %s\s
+            %s - %s\s
+             %s - %s""";
 }

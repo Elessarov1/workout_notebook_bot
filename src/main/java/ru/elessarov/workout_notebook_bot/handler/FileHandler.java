@@ -10,11 +10,9 @@ import ru.elessarov.workout_notebook_bot.service.ExerciseService;
 import ru.elessarov.workout_notebook_bot.service.FileParser;
 
 import java.io.File;
-import java.util.stream.Collectors;
 
 import static ru.elessarov.workout_notebook_bot.utils.BotUtils.getChatId;
 import static ru.elessarov.workout_notebook_bot.utils.BotUtils.isUserAdmin;
-import static ru.elessarov.workout_notebook_bot.utils.Constants.ADMIN_ID;
 
 @Service
 @AllArgsConstructor
@@ -28,12 +26,12 @@ public class FileHandler {
         isUserAdmin(tgUser);
         var data = fileParser.extractExercisesFromFile(file);
         data.stream()
-            .map(exerciseConverter::toEntity)
-            .map(exerciseService::saveExercise)
-            .toList();
+                .map(exerciseConverter::toEntity)
+                .map(exerciseService::saveExercise)
+                .toList();
 
-       var message =  new SendMessage(getChatId(update), "Данные успешно сохранены");
-       var adminMessage = new SendMessage(ADMIN_ID, "Пользователь @%s обновил данные бд".formatted(tgUser.getUserName()));
+        var message = new SendMessage(getChatId(update), "Данные успешно сохранены");
+        var adminMessage = new SendMessage("${admin_id}", "Пользователь @%s обновил данные бд".formatted(tgUser.getUserName()));
 
         return new CustomMessage(message, adminMessage);
     }
