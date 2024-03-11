@@ -10,6 +10,7 @@ import ru.elessarov.workout_notebook_bot.api.entity.Subscription;
 import ru.elessarov.workout_notebook_bot.api.entity.UserEntity;
 import ru.elessarov.workout_notebook_bot.api.enums.CallBack;
 import ru.elessarov.workout_notebook_bot.api.model.CustomMessage;
+import ru.elessarov.workout_notebook_bot.api.properties.AdminProperties;
 import ru.elessarov.workout_notebook_bot.service.SubscribeService;
 import ru.elessarov.workout_notebook_bot.service.UserService;
 import ru.elessarov.workout_notebook_bot.utils.TimeUtils;
@@ -35,6 +36,7 @@ import static ru.elessarov.workout_notebook_bot.utils.Constants.YOUR_REQUEST_WAS
 public class CallbackHandler {
     private final UserService userService;
     private final SubscribeService subscribeService;
+    private final AdminProperties adminProperties;
 
     public CustomMessage handleCallbacks(Update update) {
         String chatId = getCallbackChatId(update);
@@ -56,7 +58,7 @@ public class CallbackHandler {
         SendMessage message;
         String chatId = getCallbackChatId(update);
 
-        if(!isUserAdmin(update.getCallbackQuery().getFrom())) {
+        if(!isUserAdmin(update.getCallbackQuery().getFrom(), adminProperties.getStringAdminId())) {
             message = new SendMessage(chatId, THIS_MESSAGE_ONLY_FOR_ADMIN);
             return new CustomMessage(message, null);
         }
@@ -74,7 +76,7 @@ public class CallbackHandler {
                                              .payed(Boolean.FALSE)
                                              .build();
         subscribeService.saveSubscribe(user,subscribe);
-        var adminMessage = notifyAdmin(user, months);
+        var adminMessage = notifyAdmin(user, months, adminProperties.getStringAdminId());
         var userMessage = new SendMessage(chatId, YOUR_REQUEST_WAS_SEND);
         return new CustomMessage(userMessage, adminMessage);
     }

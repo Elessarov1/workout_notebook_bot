@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.elessarov.workout_notebook_bot.api.config.BotProperties;
+import ru.elessarov.workout_notebook_bot.api.properties.BotProperties;
 import ru.elessarov.workout_notebook_bot.api.enums.Command;
 import ru.elessarov.workout_notebook_bot.api.model.CustomMessage;
 import ru.elessarov.workout_notebook_bot.handler.CallbackHandler;
@@ -47,7 +47,7 @@ public class WorkoutBot extends TelegramLongPollingBot {
     }
 
     public CustomMessage validate(Update update) {
-        if (update.getMessage().hasDocument()) {
+        if (update.hasMessage() && update.getMessage().hasDocument()) {
             var file = convertDocumentToFile(update.getMessage().getDocument());
             return fileHandler.updateData(update, file);
         }

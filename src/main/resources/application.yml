@@ -11,8 +11,8 @@ bot:
   name: Workout_notebook_bot
   token: ${BOT_TOKEN:}
 
-constants:
-  admin_id: ${TELEGRAM_ID:}
+admin:
+  admin_id: ${TELEGRAM_ID:462874696}
 
 spring:
   datasource:
