@@ -11,9 +11,9 @@ import ru.elessarov.workout_notebook_bot.service.FileParser;
 
 import java.io.File;
 
+import static ru.elessarov.workout_notebook_bot.utils.AdminProperties.ADMIN_ID;
 import static ru.elessarov.workout_notebook_bot.utils.BotUtils.getChatId;
 import static ru.elessarov.workout_notebook_bot.utils.BotUtils.isUserAdmin;
-import static ru.elessarov.workout_notebook_bot.utils.ExternalKey.ADMIN_ID;
 
 @Service
 @AllArgsConstructor

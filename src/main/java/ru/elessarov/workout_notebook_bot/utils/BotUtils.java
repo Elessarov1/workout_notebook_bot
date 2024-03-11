@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.elessarov.workout_notebook_bot.utils.ExternalKey.ADMIN_ID;
+import static ru.elessarov.workout_notebook_bot.utils.AdminProperties.ADMIN_ID;
 
 @UtilityClass
 public class BotUtils {
