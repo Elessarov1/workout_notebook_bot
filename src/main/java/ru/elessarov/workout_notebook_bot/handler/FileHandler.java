@@ -13,6 +13,7 @@ import java.io.File;
 
 import static ru.elessarov.workout_notebook_bot.utils.BotUtils.getChatId;
 import static ru.elessarov.workout_notebook_bot.utils.BotUtils.isUserAdmin;
+import static ru.elessarov.workout_notebook_bot.utils.ExternalKey.ADMIN_ID;
 
 @Service
 @AllArgsConstructor
@@ -31,7 +32,7 @@ public class FileHandler {
                 .toList();
 
         var message = new SendMessage(getChatId(update), "Данные успешно сохранены");
-        var adminMessage = new SendMessage("${admin_id}", "Пользователь @%s обновил данные бд".formatted(tgUser.getUserName()));
+        var adminMessage = new SendMessage(ADMIN_ID, "Пользователь @%s обновил данные бд".formatted(tgUser.getUserName()));
 
         return new CustomMessage(message, adminMessage);
     }

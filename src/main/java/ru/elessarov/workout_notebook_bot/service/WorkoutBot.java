@@ -83,8 +83,8 @@ public class WorkoutBot extends TelegramLongPollingBot {
     private void setCommands() throws TelegramApiException {
         List<BotCommand> commands = new ArrayList<>();
         Arrays.stream(Command.values())
-              .filter(command -> command.getMenuExcluded().equals(Boolean.FALSE))
-              .forEach(command -> commands.add(new BotCommand(command.getName(), command.getDescription())));
+                .filter(command -> command.getMenuExcluded().equals(Boolean.FALSE))
+                .forEach(command -> commands.add(new BotCommand(command.getName(), command.getDescription())));
         SetMyCommands setMyCommands = new SetMyCommands(commands, null, null);
         this.execute(setMyCommands);
     }

@@ -12,7 +12,7 @@ bot:
   token: ${BOT_TOKEN:}
 
 constants:
-  admin_id: 994778265
+  admin: ${TELEGRAM_ID:}
 
 spring:
   datasource:

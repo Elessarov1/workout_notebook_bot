@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.elessarov.workout_notebook_bot.utils.ExternalKey.ADMIN_ID;
+
 @UtilityClass
 public class BotUtils {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
@@ -43,13 +45,13 @@ public class BotUtils {
     }
 
     public static SendMessage notifyAdmin(final UserEntity user, final int months) {
-        var message = new SendMessage("${admin_id}", "@%s want to sub for %d months".formatted(user.getUsername(), months));
+        var message = new SendMessage(ADMIN_ID, "@%s want to sub for %d months".formatted(user.getUsername(), months));
         addKeyboard(message, List.of("Подтвердить оплату, %d".formatted(user.getSubscribe().getId())));
         return message;
     }
 
     public static boolean isUserAdmin(final User user) {
-        return String.valueOf(user.getId()).equals("${admin_id}");
+        return String.valueOf(user.getId()).equals(ADMIN_ID);
     }
 
     public static int extractSubId(final String value) {
